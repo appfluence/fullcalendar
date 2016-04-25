@@ -251,6 +251,7 @@ TimeGrid.mixin({
 		var timeText;
 		var fullTimeText; // more verbose time text. for the print stylesheet
 		var startTimeText; // just the start time text
+		var tooltips=view.options.tooltips;
 
 		classes.unshift('fc-time-grid-event', 'fc-v-event');
 
@@ -277,6 +278,10 @@ TimeGrid.mixin({
 				) +
 			(skinCss ?
 				' style="' + skinCss + '"' :
+				''
+				) +
+			(tooltips ?
+				' title="' + htmlEscape(event.title || '') + '"' :
 				''
 				) +
 			'>' +
