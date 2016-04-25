@@ -9,6 +9,8 @@ Calendar.defaults = {
 	forceEventDuration: false,
 	nextDayThreshold: '09:00:00', // 9am
 
+	tooltips: false,
+
 	// display
 	defaultView: 'month',
 	aspectRatio: 1.35,
