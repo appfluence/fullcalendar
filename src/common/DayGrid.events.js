@@ -102,6 +102,7 @@ DayGrid.mixin({
 		var timeHtml = '';
 		var timeText;
 		var titleHtml;
+		var tooltips=view.options.tooltips;
 
 		classes.unshift('fc-day-grid-event', 'fc-h-event');
 
@@ -125,6 +126,10 @@ DayGrid.mixin({
 					) +
 				(skinCss ?
 					' style="' + skinCss + '"' :
+					''
+					) +
+				(tooltips ?
+					' title="' + htmlEscape(event.title || '') + '"' :
 					''
 					) +
 			'>' +
