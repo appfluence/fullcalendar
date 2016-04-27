@@ -94,7 +94,7 @@ Calendar.defaults = {
 	longPressDelay: 1000,
 
 	refreshAfterAddEventSource: true,
-	refreshAfterDeleteEventSource: true
+	refreshAfterRemoveEventSource: true
 	
 };
 
