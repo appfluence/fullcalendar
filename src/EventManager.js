@@ -234,7 +234,9 @@ function EventManager(options) { // assumed to be a calendar
 		if (source) {
 			sources.push(source);
 			pendingSourceCnt++;
-			fetchEventSource(source, currentFetchID); // will eventually call reportEvents
+			if (t.options.refreshAfterAddEventSource){
+				fetchEventSource(source, currentFetchID); // will eventually call reportEvents
+			}
 		}
 	}
 
@@ -292,7 +294,11 @@ function EventManager(options) { // assumed to be a calendar
 		cache = $.grep(cache, function(e) {
 			return !isSourcesEqual(e.source, source);
 		});
-		reportEvents(cache);
+
+		if (t.options.refreshAfterRemoveEventSource){
+			reportEvents(cache);
+		}
+
 	}
 
 
