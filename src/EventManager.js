@@ -234,7 +234,9 @@ function EventManager(options) { // assumed to be a calendar
 		if (source) {
 			sources.push(source);
 			pendingSourceCnt++;
-			fetchEventSource(source, currentFetchID); // will eventually call reportEvents
+			if (t.options.refreshAfterAddEventSource){
+				fetchEventSource(source, currentFetchID); // will eventually call reportEvents
+			}
 		}
 	}
 
