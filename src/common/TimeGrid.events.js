@@ -290,33 +290,48 @@ TimeGrid.mixin({
 				) +
 			'>' +
 				'<div class="fc-content">' +
+					(event.icon?
+						'<img src="' + event.icon + '" class="fc-icon">':
+							' ') +
 					(timeText ?
 						'<div class="fc-time"' +
 						' data-start="' + htmlEscape(startTimeText) + '"' +
 						' data-full="' + htmlEscape(fullTimeText) + '"' +
 						'>' +
-							'<span>' + htmlEscape(timeText) + '</span>' +
+						'<span>' + htmlEscape(timeText) + '</span>' +
 						'</div>' :
-						''
-						) +
+						'' ) +
 					(event.title ?
 						'<div class="fc-title">' +
-							htmlEscape(event.title) +
+						htmlEscape(event.title) +
 						'</div>' :
+							''
+					) +
+					'<span flex></span>'+
+					(event.avatar ?
+						'<img src="' + event.avatar + '" class="fc-avatar">':
 						''
-						) +
+					)+
+					'</div>' +
+					'<div class="fc-content">' +
+					(event.title ?
+						'<div class="fc-title-long">' +
+						htmlEscape(event.title) +
+						'</div>' :
+							''
+					) +
 				'</div>' +
 				'<div class="fc-bg"/>' +
-				/* TODO: write CSS for this
-				(isResizableFromStart ?
-					'<div class="fc-resizer fc-start-resizer" />' :
-					''
-					) +
-				*/
+					/* TODO: write CSS for this
+					 (isResizableFromStart ?
+					 '<div class="fc-resizer fc-start-resizer" />' :
+					 ''
+					 ) +
+					 */
 				(isResizableFromEnd ?
-					'<div class="fc-resizer fc-end-resizer" />' :
-					''
-					) +
+						'<div class="fc-resizer fc-end-resizer" />' :
+						''
+				) +
 			'</a>';
 	},
 
