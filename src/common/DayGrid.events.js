@@ -133,20 +133,27 @@ DayGrid.mixin({
 					''
 					) +
 			'>' +
-				'<div class="fc-content">' +
+				'<div class="fc-content" style="display: flex">' +
+					(event.icon ?
+					'<img src="' + event.icon + '" class="fc-icon">' :
+						' ') +
+					'<div style="overflow: hidden; text-overflow: ellipsis">' +
 					(this.isRTL ?
 						titleHtml + ' ' + timeHtml : // put a natural space in between
 						timeHtml + ' ' + titleHtml   //
-						) +
+					) +
+				'</div>' +
+				'<span flex></span>' +
+				'<img src="' + event.avatar + '" class="fc-avatar">' +
 				'</div>' +
 				(isResizableFromStart ?
-					'<div class="fc-resizer fc-start-resizer" />' :
-					''
-					) +
+						'<div class="fc-resizer fc-start-resizer" />' :
+						''
+				) +
 				(isResizableFromEnd ?
-					'<div class="fc-resizer fc-end-resizer" />' :
-					''
-					) +
+						'<div class="fc-resizer fc-end-resizer" />' :
+						''
+				) +
 			'</a>';
 	},
 

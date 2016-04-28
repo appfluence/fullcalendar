@@ -1,0 +1,79 @@
+/*
+Stylesheet for Priority Matrix Calendar
+*/
+
+.fc-v-event .fc-content {
+    display: flex;
+}
+
+.fc-v-event:not(.fc-short) .fc-title {
+    display: none;
+}
+
+.fc-short .fc-content{
+    display: flex;
+}
+
+.fc-short .fc-content .fc-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fc-short .fc-title-long{
+    display: none;
+}
+
+.fc-title-long{
+    margin: 0 0 3px 3px;
+    font-weight: bold;
+}
+.fc-title{
+    font-weight: bold;
+}
+.fc-time{
+    font-weight: bold;
+}
+img.fc-icon{
+    min-width: 14px;
+    height: 14px;
+    width: 14px;
+    float: left;
+    background-color: white;
+    margin-top: 1px;
+}
+.fc-avatar{
+    min-width: 14px;
+    height: 14px;
+    width: 14px;
+    float: left;
+    margin-top: 1px;
+}
+.completed{
+    text-decoration:line-through;
+}
+button.fc-button:not([fc-state-disabled]){
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+}
+.fc-button-group button{
+    margin: 0px 1px!important;
+}
+div.fc-button-group{
+    margin: 0px !important;
+}
+.fc-center h2{
+    font-family: inherit;
+}
+.fc-event{
+    min-height: 16px;
+}
+
+.fc-toolbar{
+    padding: 10px 10px 3px 10px ;
+    margin-bottom: 0px;
+}
+.fc-state-active{
+    background-color: rgba(10,119,196,.15) !important;
+}
+.fc-widget-content.fc-today{
+    background-color: #f4f4f4 !important;
+}
