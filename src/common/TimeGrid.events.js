@@ -290,7 +290,7 @@ TimeGrid.mixin({
 				) +
 			'>' +
 				'<div class="fc-content">' +
-					(event.icon?
+					(event.icon ?
 						'<img src="' + event.icon + '" class="fc-icon">':
 							' ') +
 					(timeText ?
@@ -300,7 +300,7 @@ TimeGrid.mixin({
 						'>' +
 						'<span>' + htmlEscape(timeText) + '</span>' +
 						'</div>' :
-						'' ) +
+						'') +
 					(event.title ?
 						'<div class="fc-title">' +
 						htmlEscape(event.title) +
