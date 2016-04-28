@@ -47,6 +47,13 @@ module.exports = function(grunt) {
 		'archiveDist'
 	]);
 
+	grunt.registerTask('silent', [
+		'clean',
+		'modules',
+		'languages',
+		'archiveDist'
+	]);
+
 	// Bare minimum for debugging
 	grunt.registerTask('dev', [
 		'lumbar:build',
