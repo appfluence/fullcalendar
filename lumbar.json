@@ -3,14 +3,14 @@
   "packages": {
     "fullcalendar": {
       "modules": [
-        "fullcalendar",
+        "fullcalendar.appfluence",
         "fullcalendar.print",
         "gcal"
       ]
     }
   },
   "modules": {
-    "fullcalendar": {
+    "fullcalendar.appfluence": {
       "scripts": [
         "src/intro.js",
         "src/main.js",

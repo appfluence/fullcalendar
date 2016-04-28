@@ -1,5 +1,5 @@
 /*!
- * <%= meta.title %> v<%= meta.version %>
+ * <%= meta.title %> v<%= meta.version %> Appfluence edition
  * Docs & License: <%= meta.homepage %>
  * (c) <%= meta.copyright %>
  */
