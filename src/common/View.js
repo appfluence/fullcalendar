@@ -271,25 +271,34 @@ var View = FC.View = Class.extend(EmitterMixin, ListenerMixin, {
 	// Does everything necessary to display the view centered around the given unzoned date.
 	// Does every type of rendering EXCEPT rendering events.
 	// Is asychronous and returns a promise.
-	display: function(date) {
+	display: function(date, explicitScrollState) {
 		var _this = this;
-		var scrollState = null;
+		var prevScrollState = null;
 
-		if (this.displaying) {
-			scrollState = this.queryScroll();
+		if (explicitScrollState != null && this.displaying) { // don't need prevScrollState if explicitScrollState
+			prevScrollState = this.queryScroll();
 		}
 
 		this.calendar.freezeContentHeight();
 
-		return this.clear().then(function() { // clear the content first (async)
+		return syncThen(this.clear(), function() { // clear the content first
 			return (
 				_this.displaying =
-					$.when(_this.displayView(date)) // displayView might return a promise
-						.then(function() {
-							_this.forceScroll(_this.computeInitialScroll(scrollState));
-							_this.calendar.unfreezeContentHeight();
-							_this.triggerRender();
-						})
+					syncThen(_this.displayView(date), function() { // displayView might return a promise
+
+						// caller of display() wants a specific scroll state?
+						if (explicitScrollState != null) {
+							// we make an assumption that this is NOT the initial render,
+							// and thus don't need forceScroll (is inconveniently asynchronous)
+							_this.setScroll(explicitScrollState);
+						}
+						else {
+							_this.forceScroll(_this.computeInitialScroll(prevScrollState));
+						}
+
+						_this.calendar.unfreezeContentHeight();
+						_this.triggerRender();
+					})
 			);
 		});
 	},
@@ -303,7 +312,7 @@ var View = FC.View = Class.extend(EmitterMixin, ListenerMixin, {
 		var displaying = this.displaying;
 
 		if (displaying) { // previously displayed, or in the process of being displayed?
-			return displaying.then(function() { // wait for the display to finish
+			return syncThen(displaying, function() { // wait for the display to finish
 				_this.displaying = null;
 				_this.clearEvents();
 				return _this.clearView(); // might return a promise. chain it
@@ -390,8 +399,7 @@ var View = FC.View = Class.extend(EmitterMixin, ListenerMixin, {
 	// Binds DOM handlers to elements that reside outside the view container, such as the document
 	bindGlobalHandlers: function() {
 		this.listenTo($(document), 'mousedown', this.handleDocumentMousedown);
-		this.listenTo($(document), 'touchstart', this.handleDocumentTouchStart);
-		this.listenTo($(document), 'touchend', this.handleDocumentTouchEnd);
+		this.listenTo($(document), 'touchstart', this.processUnselect);
 	},
 
 
@@ -952,25 +960,18 @@ var View = FC.View = Class.extend(EmitterMixin, ListenerMixin, {
 	/* Mouse / Touch Unselecting (time range & event unselection)
 	------------------------------------------------------------------------------------------------------------------*/
 	// TODO: move consistently to down/start or up/end?
+	// TODO: don't kill previous selection if touch scrolling
 
 
 	handleDocumentMousedown: function(ev) {
-		// touch devices fire simulated mouse events on a "click".
-		// only process mousedown if we know this isn't a touch device.
-		if (!this.calendar.isTouch && isPrimaryMouseButton(ev)) {
-			this.processRangeUnselect(ev);
-			this.processEventUnselect(ev);
+		if (isPrimaryMouseButton(ev)) {
+			this.processUnselect(ev);
 		}
 	},
 
 
-	handleDocumentTouchStart: function(ev) {
+	processUnselect: function(ev) {
 		this.processRangeUnselect(ev);
-	},
-
-
-	handleDocumentTouchEnd: function(ev) {
-		// TODO: don't do this if because of touch-scrolling
 		this.processEventUnselect(ev);
 	},
 

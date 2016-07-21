@@ -275,6 +275,10 @@ describe('eventLimit popover', function() {
 
 				setTimeout(function() { // simulate was getting confused about which thing was being clicked :(
 					$('.fc-more-popover .event4').simulate('drag', {
+						localPoint: {
+							left: '0%', // leftmost is guaranteed to be over the 30th
+							top: '50%'
+						},
 						end: $('.fc-slats tr:eq(6)') // the middle will be 7/30, 3:00am
 					});
 				}, 0);
@@ -289,7 +293,7 @@ describe('eventLimit popover', function() {
 					setTimeout(function() { // try to wait until drag is over. eventDrop won't fire BTW
 						expect($('.fc-more-popover')).toBeInDOM();
 						done();
-					},0);
+					}, 0);
 				};
 				init();
 

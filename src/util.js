@@ -144,7 +144,7 @@ function subtractInnerElHeight(outerEl, innerEl) {
 	var both = outerEl.add(innerEl);
 	var diff;
 
-	// fuckin IE8/9/10/11 sometimes returns 0 for dimensions. this weird hack was the only thing that worked
+	// effin' IE8/9/10/11 sometimes returns 0 for dimensions. this weird hack was the only thing that worked
 	both.css({
 		position: 'relative', // cause a reflow, which will force fresh dimension recalculation
 		left: -1 // ensure reflow in case the el was already relative. negative is less likely to cause new scroll
@@ -341,6 +341,30 @@ function preventSelection(el) {
 // Stops a mouse/touch event from doing it's native browser action
 function preventDefault(ev) {
 	ev.preventDefault();
+}
+
+
+// attach a handler to get called when ANY scroll action happens on the page.
+// this was impossible to do with normal on/off because 'scroll' doesn't bubble.
+// http://stackoverflow.com/a/32954565/96342
+// returns `true` on success.
+function bindAnyScroll(handler) {
+	if (window.addEventListener) {
+		window.addEventListener('scroll', handler, true); // useCapture=true
+		return true;
+	}
+	return false;
+}
+
+
+// undoes bindAnyScroll. must pass in the original function.
+// returns `true` on success.
+function unbindAnyScroll(handler) {
+	if (window.removeEventListener) {
+		window.removeEventListener('scroll', handler, true); // useCapture=true
+		return true;
+	}
+	return false;
 }
 
 
@@ -904,4 +928,18 @@ function debounce(func, wait, immediate) {
 		}
 		return result;
 	};
+}
+
+
+// HACK around jQuery's now A+ promises: execute callback synchronously if already resolved.
+// thenFunc shouldn't accept args.
+// similar to whenResources in Scheduler plugin.
+function syncThen(promise, thenFunc) {
+	// not a promise, or an already-resolved promise?
+	if (!promise || !promise.then || promise.state() === 'resolved') {
+		return $.when(thenFunc()); // resolve immediately
+	}
+	else if (thenFunc) {
+		return promise.then(thenFunc);
+	}
 }
