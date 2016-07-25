@@ -48,6 +48,6 @@ img.fc-icon{
     float: left;
     margin-top: 1px;
 }
-.completed{
+.completed span.fc-title{
     text-decoration:line-through;
 }
