@@ -51,29 +51,3 @@ img.fc-icon{
 .completed{
     text-decoration:line-through;
 }
-button.fc-button:not([fc-state-disabled]){
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-}
-.fc-button-group button{
-    margin: 0px 1px!important;
-}
-div.fc-button-group{
-    margin: 0px !important;
-}
-.fc-center h2{
-    font-family: inherit;
-}
-.fc-event{
-    min-height: 16px;
-}
-
-.fc-toolbar{
-    padding: 10px 10px 3px 10px ;
-    margin-bottom: 0px;
-}
-.fc-state-active{
-    background-color: rgba(10,119,196,.15) !important;
-}
-.fc-widget-content.fc-today{
-    background-color: #f4f4f4 !important;
-}
