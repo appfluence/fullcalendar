@@ -23,15 +23,13 @@ Stylesheet for Priority Matrix Calendar
     display: none;
 }
 
-.fc-title-long{
+.fc-title-long {
     margin: 0 0 3px 3px;
-    font-weight: bold;
+    font-weight: 700
 }
-.fc-title{
-    font-weight: bold;
-}
-.fc-time{
-    font-weight: bold;
+
+.fc-time, .fc-title {
+    font-weight: 700
 }
 img.fc-icon{
     min-width: 14px;
