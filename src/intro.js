@@ -1,7 +1,7 @@
 /*!
- * <%= meta.title %> v<%= meta.version %> Appfluence edition
- * Docs & License: <%= meta.homepage %>
- * (c) <%= meta.copyright %>
+ * <%= title %> v<%= version %> Appfluence edition
+ * Docs & License: <%= homepage %>
+ * (c) <%= copyright %>
  */
 
 (function(factory) {
