@@ -259,6 +259,9 @@ TimeGrid.mixin({
 
 		classes.unshift('fc-time-grid-event', 'fc-v-event');
 
+		var avatar = typeof event.avatar === 'function' ? event.avatar() : undefined;
+		var icon = typeof event.icon === 'function' ? event.icon() : undefined;
+
 		if (view.isMultiDayEvent(event)) { // if the event appears to span more than one day...
 			// Don't display time text on segments that run entirely through a day.
 			// That would appear as midnight-midnight and would look dumb.
@@ -290,8 +293,8 @@ TimeGrid.mixin({
 				) +
 			'>' +
 				'<div class="fc-content">' +
-					(event.icon ?
-						'<img src="' + event.icon + '" class="fc-icon">':
+					(icon ?
+						'<img src="' + icon + '" class="fc-icon">':
 							' ') +
 					(timeText ?
 						'<div class="fc-time"' +
@@ -308,8 +311,8 @@ TimeGrid.mixin({
 							''
 					) +
 					'<span flex></span>'+
-					(event.avatar ?
-						'<img src="' + event.avatar + '" class="fc-avatar">':
+					(avatar ?
+						'<img src="' + avatar + '" class="fc-avatar">':
 						''
 					)+
 					'</div>' +

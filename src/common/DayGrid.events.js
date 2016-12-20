@@ -105,6 +105,10 @@ DayGrid.mixin({
 		var tooltips=view.options.tooltips;
 
 		classes.unshift('fc-day-grid-event', 'fc-h-event');
+		
+		var avatar = typeof event.avatar === 'function' ? event.avatar() : undefined;
+		var icon = typeof event.icon === 'function' ? event.icon() : undefined; 
+		
 
 		// Only display a timed events time if it is the starting segment
 		if (seg.isStart) {
@@ -134,8 +138,8 @@ DayGrid.mixin({
 					) +
 			'>' +
 				'<div class="fc-content" style="display: flex">' +
-					(event.icon ?
-					'<img src="' + event.icon + '" class="fc-icon">' :
+					(icon ?
+					'<img src="' + icon + '" class="fc-icon">' :
 						' ') +
 					'<div style="overflow: hidden; text-overflow: ellipsis">' +
 					(this.isRTL ?
@@ -144,7 +148,9 @@ DayGrid.mixin({
 					) +
 				'</div>' +
 				'<span flex></span>' +
-				'<img src="' + event.avatar + '" class="fc-avatar">' +
+				(avatar ?
+					'<img src="' + avatar + '" class="fc-avatar">' :
+					'') +
 				'</div>' +
 				(isResizableFromStart ?
 						'<div class="fc-resizer fc-start-resizer" />' :
